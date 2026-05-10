@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OnPoint Operating Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="authView" class="auth-shell hidden">
+    <div class="auth-card">
+      <div class="brand-mark">OP</div>
+      <h1>OnPoint Operating Dashboard</h1>
+      <p id="authCopy">Set a local password to lock this browser copy.</p>
+      <div id="setupBlock" class="stack hidden">
+        <label>Password</label>
+        <input id="newPassword" type="password" autocomplete="new-password" placeholder="Create password" />
+        <label>Confirm Password</label>
+        <input id="confirmPassword" type="password" autocomplete="new-password" placeholder="Confirm password" />
+        <button class="btn primary" id="setPasswordBtn">Set Password</button>
+      </div>
+      <div id="loginBlock" class="stack hidden">
+        <label>Password</label>
+        <input id="password" type="password" autocomplete="current-password" placeholder="Enter password" />
+        <button class="btn primary" id="unlockBtn">Unlock</button>
+      </div>
+      <div id="authMessage" class="message"></div>
+      <p class="fine-print">This is a local browser lock, not enterprise authentication. Do not store sensitive records or credentials in this app.</p>
+    </div>
+  </div>
+
+  <div id="appView" class="app-shell hidden">
+    <aside class="sidebar">
+      <div class="side-brand">
+        <div class="brand-mark small">OP</div>
+        <div><strong>OnPoint</strong><span>Operating OS</span></div>
+      </div>
+      <nav id="nav"></nav>
+      <div class="side-footer">
+        <button class="btn ghost full" id="lockBtn">Lock</button>
+        <div class="mini-muted">Local-first app. Manual imports. No APIs.</div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div><h1 id="pageTitle">Command Center</h1><p id="pageSubtitle">Bring in the right volume. Get it out profitably. Keep patients on therapy.</p></div>
+        <div class="top-actions">
+          <div class="field compact"><label>Start</label><input id="rangeStart" type="date" /></div>
+          <div class="field compact"><label>End</label><input id="rangeEnd" type="date" /></div>
+          <div class="field compact"><label>Data Mode</label><select id="dataMode"><option value="manual">Manual</option><option value="imported">Imported</option><option value="combined">Combined</option></select></div>
+          <button class="btn" id="saveBtn">Save</button>
+        </div>
+      </header>
+      <section id="view-command" class="view active"></section>
+      <section id="view-daily" class="view"></section>
+      <section id="view-imports" class="view"></section>
+      <section id="view-ledgers" class="view"></section>
+      <section id="view-teams" class="view"></section>
+      <section id="view-channels" class="view"></section>
+      <section id="view-locations" class="view"></section>
+      <section id="view-doctors" class="view"></section>
+      <section id="view-enterprise" class="view"></section>
+      <section id="view-meeting" class="view"></section>
+      <section id="view-settings" class="view"></section>
+    </main>
+  </div>
+  <div id="toast" class="toast hidden"></div>
+  <script src="app.js"></script>
+</body>
+</html>
