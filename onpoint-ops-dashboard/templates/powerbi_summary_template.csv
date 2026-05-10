@@ -1,0 +1,2 @@
+date,location,channel,doctor,enterpriseAccount,patients,scriptsReceived,scriptsFilled,revenue,cogs,grossProfit,adherencePct,fillRatePct
+2026-05-10,Location One,Doctor Practice,Doctor One,Account One,250,330,300,42000,30000,12000,88,91
