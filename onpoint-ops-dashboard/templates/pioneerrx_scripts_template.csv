@@ -1,0 +1,2 @@
+date,rxNumber,patientId,doctor,location,channel,status,revenue,cogs,grossProfit,timeToStartHours,adherencePct,payer,drugName,ndc
+2026-05-10,RX100001,P12345,Dr. Smith,Flushing,Doctor / Practice,Filled,125.00,82.00,43.00,18,92,PBM A,Medication A,00000000000
