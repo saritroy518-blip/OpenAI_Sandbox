@@ -1,0 +1,3 @@
+date,location,account,accountType,amount,department,vendor,customer
+2026-05-10,Location One,Revenue,revenue,50000.00,Store,,
+2026-05-10,Location One,Drug Cost,cogs,35000.00,Store,Vendor,
