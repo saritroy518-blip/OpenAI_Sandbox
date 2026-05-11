@@ -3,18 +3,18 @@
   'use strict';
 
   const GROUPS = [
-    {name:'Run Today', ids:['command','mobileceo','daily','scripts','worklists','actions','bulkops','meeting','trends','insights','setup']},
+    {name:'Run Today', ids:['command','mobileceo','daily','scripts','worklists','actions','bulkops','meeting','analytics','trends','insights','setup']},
     {name:'Finance', ids:['pnlcost','ledgers','finance','budget','scenario','close','backup','capitalpack','ownerecon']},
     {name:'Sales / Doctors', ids:['doctors','doctorprofiles','tiers','pipeline','cohorts']},
     {name:'Enterprise', ids:['enterprise','enterpriseprofiles','reports','partnercard','lift']},
     {name:'Ops', ids:['scriptops','bulkops','pa','retention','delivery','drugs','locations','locationprofiles','leaderboard','playbooks']},
     {name:'People / Actions', ids:['people','actions','bulkops','ownerdash','heatmap','teams']},
-    {name:'Reports', ids:['history','dataqa','importqa','maturity','qatest']},
+    {name:'Reports', ids:['analytics','history','dataqa','importqa','maturity','qatest']},
     {name:'Admin', ids:['search','risks','dictionary','admin','settings','channels','imports']}
   ];
 
   const LABELS = {
-    command:'Command Center', mobileceo:'CEO Mobile', daily:'Daily Entry', scripts:'Script Queue', worklists:'Worklists', actions:'Actions', bulkops:'Bulk Ops', meeting:'Meeting Mode', trends:'Trends', insights:'CEO Brief', setup:'Setup Wizard',
+    command:'Command Center', mobileceo:'CEO Mobile', daily:'Daily Entry', scripts:'Script Queue', worklists:'Worklists', actions:'Actions', bulkops:'Bulk Ops', meeting:'Meeting Mode', analytics:'Analytics + Trends', trends:'Trends', insights:'CEO Brief', setup:'Setup Wizard',
     pnlcost:'P&L Cost Bridge', ledgers:'Finance + Forecast', finance:'Finance', budget:'Budget', scenario:'Scenario', close:'Monthly Close', backup:'Backup', capitalpack:'Capital Pack', ownerecon:'Owner Economics',
     doctors:'Doctors', doctorprofiles:'Doctor Profiles', tiers:'Doctor Tiers', pipeline:'Pipeline', cohorts:'Cohorts',
     enterprise:'Enterprise', enterpriseprofiles:'Account Profiles', reports:'Reports', partnercard:'Partner Scorecard', lift:'Lift',
