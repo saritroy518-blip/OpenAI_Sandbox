@@ -1,97 +1,137 @@
-/* Grouped navigation layer */
+/* Grouped navigation layer: stable accordion sidebar */
 .grouped-nav-shell{
   background:#111827;
   border-top:1px solid #253044;
   padding:8px 0 10px;
+  width:100%;
+  overflow:visible;
 }
 .grouped-nav-toolbar{
-  display:flex;
-  gap:8px;
+  display:grid;
+  grid-template-columns:1fr;
+  gap:6px;
   align-items:center;
-  margin-bottom:8px;
+  margin-bottom:10px;
+}
+.grouped-nav-current{
+  color:#9ca3af;
+  font-size:10px;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.35px;
+  white-space:normal;
+  line-height:1.25;
+}
+.quick-search-wrap{
+  position:relative;
+  width:100%;
 }
 .grouped-nav-search{
-  flex:1;
-  min-width:180px;
+  width:100%;
+  min-width:0;
   border:1px solid #374151;
   background:#0b1220;
   color:#fff;
-  border-radius:999px;
-  padding:8px 12px;
+  border-radius:12px;
+  padding:10px 12px;
   text-align:left;
   font-size:13px;
+  outline:none;
+}
+.grouped-nav-search:focus{
+  border-color:#93c5fd;
+  box-shadow:0 0 0 3px rgba(147,197,253,.16);
 }
 .grouped-nav-search::placeholder{color:#9ca3af}
-.grouped-nav-current{
-  color:#d1d5db;
-  font-size:11px;
-  font-weight:900;
-  white-space:nowrap;
-  text-transform:uppercase;
-  letter-spacing:.4px;
-}
 .grouped-nav-grid{
   display:grid;
-  grid-template-columns:repeat(8,minmax(120px,1fr));
+  grid-template-columns:1fr;
   gap:6px;
+  width:100%;
 }
 .nav-group{
   position:relative;
+  width:100%;
 }
-.nav-group-title{
+.nav-group-title,
+#nav .nav-group-title{
   width:100%;
   border:0;
   border-radius:12px;
   background:#1f2937;
   color:#d1d5db;
-  padding:9px 10px;
+  padding:11px 12px;
   font-size:12px;
   font-weight:950;
   cursor:pointer;
   text-align:left;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  line-height:1.15;
 }
+.nav-group-title::after{
+  content:'▾';
+  opacity:.75;
+  font-size:11px;
+  transform:rotate(-90deg);
+  transition:transform .15s ease;
+}
+.nav-group.open .nav-group-title::after{transform:rotate(0deg)}
 .nav-group-title.active,
-.nav-group-title:hover{
+.nav-group-title:hover,
+#nav .nav-group-title.active,
+#nav .nav-group-title:hover{
   background:#fff;
   color:#111827;
 }
 .nav-group-menu{
   display:none;
-  position:absolute;
-  z-index:60;
-  top:42px;
-  left:0;
-  min-width:230px;
-  background:#fff;
-  color:#111827;
-  border:1px solid #e5e7eb;
+  position:static;
+  z-index:auto;
+  min-width:0;
+  width:100%;
+  background:#0b1220;
+  color:#e5e7eb;
+  border:1px solid #253044;
   border-radius:14px;
-  box-shadow:0 18px 44px rgba(0,0,0,.22);
+  box-shadow:none;
   padding:6px;
+  margin-top:6px;
+  max-height:42vh;
+  overflow:auto;
 }
-.nav-group.open .nav-group-menu{display:grid;gap:4px}
-.nav-item-btn{
+.nav-group.open .nav-group-menu{
+  display:grid;
+  gap:4px;
+}
+.nav-item-btn,
+#nav .nav-item-btn{
   border:0;
   background:transparent;
-  color:#111827;
+  color:#d1d5db;
   border-radius:10px;
-  padding:9px 10px;
+  padding:10px 10px;
   text-align:left;
   font-size:13px;
   font-weight:800;
   cursor:pointer;
+  width:100%;
+  line-height:1.2;
 }
-.nav-item-btn:hover{background:#f3f4f6}
-.nav-item-btn.active{background:#111827;color:#fff}
+.nav-item-btn:hover,
+#nav .nav-item-btn:hover{background:#253044;color:#fff}
+.nav-item-btn.active,
+#nav .nav-item-btn.active{background:#fff;color:#111827}
 .nav-source-hidden{display:none!important}
 .quick-search-results{
   display:none;
   position:absolute;
   z-index:80;
-  top:48px;
+  top:46px;
   left:0;
   right:0;
-  max-height:360px;
+  max-height:55vh;
   overflow:auto;
   background:#fff;
   border:1px solid #e5e7eb;
@@ -100,8 +140,8 @@
   padding:6px;
 }
 .quick-search-results.open{display:grid;gap:4px}
-.quick-search-wrap{position:relative;flex:1}
-.quick-result{
+.quick-result,
+#nav .quick-result{
   border:0;
   background:#fff;
   color:#111827;
@@ -109,30 +149,44 @@
   padding:10px;
   text-align:left;
   cursor:pointer;
+  width:100%;
 }
-.quick-result:hover{background:#f3f4f6}
+.quick-result:hover,
+#nav .quick-result:hover{background:#f3f4f6;color:#111827}
 .quick-result strong{display:block;font-size:13px}
 .quick-result span{display:block;font-size:11px;color:#667085;margin-top:2px}
 
-@media(max-width:1200px){
-  .grouped-nav-grid{grid-template-columns:repeat(4,1fr)}
+/* When the app collapses to a top layout, keep navigation compact instead of full-width tab chaos. */
+@media(max-width:1100px){
+  .sidebar{
+    max-height:none;
+  }
+  #nav{
+    max-height:70vh;
+    overflow:auto;
+  }
+  .grouped-nav-shell{
+    padding-bottom:6px;
+  }
+  .grouped-nav-grid{
+    grid-template-columns:1fr;
+  }
+  .nav-group-menu{
+    max-height:48vh;
+  }
 }
 @media(max-width:700px){
-  .grouped-nav-shell{padding:8px 0 9px}
-  .grouped-nav-toolbar{display:grid;grid-template-columns:1fr;gap:6px}
   .grouped-nav-current{display:none}
-  .grouped-nav-grid{display:flex;overflow-x:auto;-webkit-overflow-scrolling:touch;gap:6px;padding-bottom:2px}
-  .nav-group{position:static;flex:0 0 auto}
-  .nav-group-title{white-space:nowrap;font-size:11px;padding:8px 10px}
-  .nav-group-menu{
+  .grouped-nav-search{font-size:16px;padding:10px 12px}
+  .nav-group-title,
+  #nav .nav-group-title{font-size:12px;padding:10px 11px}
+  .nav-item-btn,
+  #nav .nav-item-btn{font-size:13px;padding:10px}
+  .quick-search-results{
     position:fixed;
     left:10px;
     right:10px;
-    top:auto;
-    bottom:82px;
-    min-width:0;
-    max-height:55vh;
-    overflow:auto;
+    top:92px;
+    max-height:60vh;
   }
-  .quick-search-results{position:fixed;left:10px;right:10px;top:110px;max-height:55vh}
 }
