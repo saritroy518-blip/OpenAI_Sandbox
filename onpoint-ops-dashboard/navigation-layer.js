@@ -2,6 +2,15 @@
 (function(){
   'use strict';
 
+  function loadReliableImport(){
+    if(window.StableImport || document.getElementById('stableImportLayerScript')) return;
+    const s=document.createElement('script');
+    s.id='stableImportLayerScript';
+    s.src='import-fix-layer.js?v=stable-import-20260510';
+    s.onload=()=>{try{window.StableImport&&window.StableImport.render&&window.StableImport.render()}catch(e){console.warn(e)}};
+    document.body.appendChild(s);
+  }
+
   const GROUPS = [
     {name:'Run Today', ids:['command','mobileceo','daily','scripts','worklists','actions','bulkops','meeting','forecast','analytics','trends','insights','setup']},
     {name:'Finance', ids:['allocation','reconcile','costledger','forecast','pnlcost','ledgers','finance','budget','scenario','close','backup','capitalpack','ownerecon','channelecon']},
@@ -9,8 +18,8 @@
     {name:'Enterprise', ids:['enterprise','enterpriseprofiles','reports','partnercard','lift','channelecon']},
     {name:'Ops', ids:['scriptops','bulkops','forecast','pa','retention','delivery','drugs','locations','locationprofiles','leaderboard','playbooks']},
     {name:'People / Actions', ids:['people','actions','bulkops','ownerdash','heatmap','teams']},
-    {name:'Reports', ids:['allocation','reconcile','forecast','analytics','costledger','channelecon','history','dataqa','importqa','maturity','qatest']},
-    {name:'Admin', ids:['search','risks','dictionary','admin','settings','channels','imports']}
+    {name:'Reports', ids:['allocation','reconcile','forecast','analytics','costledger','channelecon','history','dataqa','importqa','importfix','maturity','qatest']},
+    {name:'Admin', ids:['importfix','search','risks','dictionary','admin','settings','channels','imports']}
   ];
 
   const LABELS = {
@@ -20,7 +29,7 @@
     enterprise:'Enterprise', enterpriseprofiles:'Account Profiles', reports:'Reports', partnercard:'Partner Scorecard', lift:'Lift',
     scriptops:'Script Ops', pa:'PA Intelligence', retention:'Retention + DSOH', delivery:'Delivery', drugs:'Drug Mix', locations:'Locations', locationprofiles:'Location Profiles', leaderboard:'Leaderboard', playbooks:'Playbooks',
     people:'People', ownerdash:'Owner Dashboards', heatmap:'Team Heatmap', teams:'Teams + OKRs',
-    history:'History', dataqa:'Data QA', importqa:'Import QA', maturity:'Maturity', qatest:'QA Self-Test',
+    history:'History', dataqa:'Data QA', importqa:'Import QA', importfix:'Reliable Import', maturity:'Maturity', qatest:'QA Self-Test',
     search:'Search', risks:'Risks', dictionary:'Dictionary', admin:'Admin', settings:'Settings', channels:'Channels', imports:'Import Center'
   };
 
@@ -32,8 +41,10 @@
   function labelFor(id){return LABELS[id] || id.replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase())}
 
   function build(){
+    loadReliableImport();
     const n=nav(); if(!n) return;
     const ids=availableIds();
+    ids.add('importfix');
     if(!ids.size) return;
     let shell=document.getElementById('groupedNavShell');
     if(!shell){shell=document.createElement('div');shell.id='groupedNavShell';shell.className='grouped-nav-shell';n.prepend(shell);}
@@ -49,7 +60,7 @@
     }).join('');
     shell.innerHTML=`<div class="grouped-nav-toolbar"><div class="quick-search-wrap"><input id="quickNavSearch" class="grouped-nav-search" placeholder="Jump to page..." autocomplete="off" /><div id="quickSearchResults" class="quick-search-results"></div></div><div class="grouped-nav-current">Current: ${activeLabel}</div></div><div class="grouped-nav-grid">${groupsHtml}</div>`;
     shell.querySelectorAll('.nav-group-title').forEach(btn=>{btn.onclick=e=>{e.stopPropagation();const group=btn.closest('.nav-group');shell.querySelectorAll('.nav-group').forEach(g=>{if(g!==group)g.classList.remove('open')});group.classList.toggle('open');};});
-    shell.querySelectorAll('[data-jump]').forEach(btn=>{btn.onclick=e=>{e.stopPropagation();clickOriginal(btn.dataset.jump);shell.querySelectorAll('.nav-group').forEach(g=>g.classList.remove('open'));setTimeout(build,50);};});
+    shell.querySelectorAll('[data-jump]').forEach(btn=>{btn.onclick=e=>{e.stopPropagation();if(btn.dataset.jump==='importfix'&&window.StableImport){window.StableImport.show('importfix')}else{clickOriginal(btn.dataset.jump)}shell.querySelectorAll('.nav-group').forEach(g=>g.classList.remove('open'));setTimeout(build,50);};});
     document.addEventListener('click', e=>{ if(!e.target.closest('#groupedNavShell')) shell.querySelectorAll('.nav-group').forEach(g=>g.classList.remove('open')); }, {once:true});
     setupQuickSearch(ids);
   }
@@ -57,7 +68,7 @@
     const input=document.getElementById('quickNavSearch'), results=document.getElementById('quickSearchResults');
     if(!input||!results) return;
     const items=[];GROUPS.forEach(g=>g.ids.forEach(id=>{if(ids.has(id)&&!items.find(x=>x.id===id))items.push({id,label:labelFor(id),group:g.name})}));
-    input.oninput=()=>{const q=input.value.trim().toLowerCase();if(!q){results.classList.remove('open');results.innerHTML='';return;}const matches=items.filter(x=>(x.label+' '+x.group+' '+x.id).toLowerCase().includes(q)).slice(0,12);results.innerHTML=matches.map(x=>`<button class="quick-result" type="button" data-jump="${x.id}"><strong>${x.label}</strong><span>${x.group}</span></button>`).join('') || `<div class="quick-result"><strong>No matches</strong><span>Try a different page name.</span></div>`;results.classList.add('open');results.querySelectorAll('[data-jump]').forEach(btn=>btn.onclick=()=>{clickOriginal(btn.dataset.jump);input.value='';results.classList.remove('open');setTimeout(build,50)});};
+    input.oninput=()=>{const q=input.value.trim().toLowerCase();if(!q){results.classList.remove('open');results.innerHTML='';return;}const matches=items.filter(x=>(x.label+' '+x.group+' '+x.id).toLowerCase().includes(q)).slice(0,12);results.innerHTML=matches.map(x=>`<button class="quick-result" type="button" data-jump="${x.id}"><strong>${x.label}</strong><span>${x.group}</span></button>`).join('') || `<div class="quick-result"><strong>No matches</strong><span>Try a different page name.</span></div>`;results.classList.add('open');results.querySelectorAll('[data-jump]').forEach(btn=>btn.onclick=()=>{if(btn.dataset.jump==='importfix'&&window.StableImport){window.StableImport.show('importfix')}else{clickOriginal(btn.dataset.jump)}input.value='';results.classList.remove('open');setTimeout(build,50)});};
   }
   const oldRender=window.render;
   if(typeof oldRender==='function'){window.render=function(){const out=oldRender.apply(this,arguments);setTimeout(build,100);return out;};}
