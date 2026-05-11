@@ -3,18 +3,18 @@
   'use strict';
 
   const GROUPS = [
-    {name:'Run Today', ids:['command','mobileceo','daily','scripts','worklists','actions','meeting','trends','insights','setup']},
+    {name:'Run Today', ids:['command','mobileceo','daily','scripts','worklists','actions','bulkops','meeting','trends','insights','setup']},
     {name:'Finance', ids:['ledgers','finance','budget','scenario','close','backup','capitalpack','ownerecon']},
     {name:'Sales / Doctors', ids:['doctors','doctorprofiles','tiers','pipeline','cohorts']},
     {name:'Enterprise', ids:['enterprise','enterpriseprofiles','reports','partnercard','lift']},
-    {name:'Ops', ids:['scriptops','pa','retention','delivery','drugs','locations','locationprofiles','leaderboard','playbooks']},
-    {name:'People / Actions', ids:['people','ownerdash','heatmap','teams']},
+    {name:'Ops', ids:['scriptops','bulkops','pa','retention','delivery','drugs','locations','locationprofiles','leaderboard','playbooks']},
+    {name:'People / Actions', ids:['people','actions','bulkops','ownerdash','heatmap','teams']},
     {name:'Reports', ids:['history','dataqa','importqa','maturity','qatest']},
     {name:'Admin', ids:['search','risks','dictionary','admin','settings','channels','imports']}
   ];
 
   const LABELS = {
-    command:'Command Center', mobileceo:'CEO Mobile', daily:'Daily Entry', scripts:'Script Queue', worklists:'Worklists', actions:'Actions', meeting:'Meeting Mode', trends:'Trends', insights:'CEO Brief', setup:'Setup Wizard',
+    command:'Command Center', mobileceo:'CEO Mobile', daily:'Daily Entry', scripts:'Script Queue', worklists:'Worklists', actions:'Actions', bulkops:'Bulk Ops', meeting:'Meeting Mode', trends:'Trends', insights:'CEO Brief', setup:'Setup Wizard',
     ledgers:'Finance + Forecast', finance:'Finance', budget:'Budget', scenario:'Scenario', close:'Monthly Close', backup:'Backup', capitalpack:'Capital Pack', ownerecon:'Owner Economics',
     doctors:'Doctors', doctorprofiles:'Doctor Profiles', tiers:'Doctor Tiers', pipeline:'Pipeline', cohorts:'Cohorts',
     enterprise:'Enterprise', enterpriseprofiles:'Account Profiles', reports:'Reports', partnercard:'Partner Scorecard', lift:'Lift',
@@ -52,7 +52,7 @@
     const activeLabel=labelFor(activeId);
 
     const groupsHtml=GROUPS.map(group=>{
-      const groupIds=group.ids.filter(id=>ids.has(id));
+      const groupIds=[...new Set(group.ids.filter(id=>ids.has(id)))];
       if(!groupIds.length) return '';
       const isActive=groupIds.includes(activeId);
       return `<div class="nav-group ${isActive?'active-group':''}" data-group="${group.name}">
@@ -99,7 +99,7 @@
     const input=document.getElementById('quickNavSearch'), results=document.getElementById('quickSearchResults');
     if(!input||!results) return;
     const items=[];
-    GROUPS.forEach(g=>g.ids.forEach(id=>{if(ids.has(id))items.push({id,label:labelFor(id),group:g.name})}));
+    GROUPS.forEach(g=>g.ids.forEach(id=>{if(ids.has(id)&&!items.find(x=>x.id===id))items.push({id,label:labelFor(id),group:g.name})}));
     input.oninput=()=>{
       const q=input.value.trim().toLowerCase();
       if(!q){results.classList.remove('open');results.innerHTML='';return;}
