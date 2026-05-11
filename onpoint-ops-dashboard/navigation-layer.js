@@ -3,7 +3,7 @@
   'use strict';
 
   const GROUPS = [
-    {name:'Run Today', ids:['command','mobileceo','daily','worklists','actions','meeting','trends','insights']},
+    {name:'Run Today', ids:['command','mobileceo','daily','worklists','actions','meeting','trends','insights','setup']},
     {name:'Finance', ids:['ledgers','finance','budget','scenario','close','backup','capitalpack']},
     {name:'Sales / Doctors', ids:['doctors','doctorprofiles','tiers','pipeline','cohorts']},
     {name:'Enterprise', ids:['enterprise','enterpriseprofiles','reports','partnercard']},
@@ -14,7 +14,7 @@
   ];
 
   const LABELS = {
-    command:'Command Center', mobileceo:'CEO Mobile', daily:'Daily Entry', worklists:'Worklists', actions:'Actions', meeting:'Meeting Mode', trends:'Trends', insights:'CEO Brief',
+    command:'Command Center', mobileceo:'CEO Mobile', daily:'Daily Entry', worklists:'Worklists', actions:'Actions', meeting:'Meeting Mode', trends:'Trends', insights:'CEO Brief', setup:'Setup Wizard',
     ledgers:'Finance + Forecast', finance:'Finance', budget:'Budget', scenario:'Scenario', close:'Monthly Close', backup:'Backup', capitalpack:'Capital Pack',
     doctors:'Doctors', doctorprofiles:'Doctor Profiles', tiers:'Doctor Tiers', pipeline:'Pipeline', cohorts:'Cohorts',
     enterprise:'Enterprise', enterpriseprofiles:'Account Profiles', reports:'Reports', partnercard:'Partner Scorecard',
