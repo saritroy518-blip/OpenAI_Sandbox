@@ -1,4 +1,37 @@
 /* Grouped navigation layer: stable accordion sidebar */
+
+/* Critical layout override: keep the app as a real left-sidebar layout on desktop/tablet. The base stylesheet collapsed at 1100px, which made the nav become a huge top block. */
+.app-shell{
+  display:grid!important;
+  grid-template-columns:270px minmax(0,1fr)!important;
+  min-height:100vh!important;
+}
+.sidebar{
+  background:#111827;
+  color:white;
+  padding:18px;
+  display:flex!important;
+  flex-direction:column!important;
+  gap:14px;
+  position:sticky!important;
+  top:0!important;
+  height:100vh!important;
+  min-width:270px;
+  max-width:270px;
+  overflow:hidden;
+}
+#nav{
+  display:grid!important;
+  gap:6px!important;
+  overflow:auto!important;
+  min-height:0;
+  padding-right:2px;
+}
+.main{
+  min-width:0!important;
+  width:100%;
+}
+
 .grouped-nav-shell{
   background:#111827;
   border-top:1px solid #253044;
@@ -156,26 +189,22 @@
 .quick-result strong{display:block;font-size:13px}
 .quick-result span{display:block;font-size:11px;color:#667085;margin-top:2px}
 
-/* When the app collapses to a top layout, keep navigation compact instead of full-width tab chaos. */
-@media(max-width:1100px){
+@media(max-width:760px){
+  .app-shell{
+    grid-template-columns:1fr!important;
+  }
   .sidebar{
-    max-height:none;
+    position:static!important;
+    height:auto!important;
+    min-width:0;
+    max-width:none;
+    overflow:visible;
+    padding:12px;
   }
   #nav{
-    max-height:70vh;
-    overflow:auto;
+    max-height:62vh;
+    overflow:auto!important;
   }
-  .grouped-nav-shell{
-    padding-bottom:6px;
-  }
-  .grouped-nav-grid{
-    grid-template-columns:1fr;
-  }
-  .nav-group-menu{
-    max-height:48vh;
-  }
-}
-@media(max-width:700px){
   .grouped-nav-current{display:none}
   .grouped-nav-search{font-size:16px;padding:10px 12px}
   .nav-group-title,
