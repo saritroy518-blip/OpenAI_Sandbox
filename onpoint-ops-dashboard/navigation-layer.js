@@ -4,18 +4,18 @@
 
   const GROUPS = [
     {name:'Run Today', ids:['command','mobileceo','daily','scripts','worklists','actions','bulkops','meeting','forecast','analytics','trends','insights','setup']},
-    {name:'Finance', ids:['costledger','forecast','pnlcost','ledgers','finance','budget','scenario','close','backup','capitalpack','ownerecon','channelecon']},
+    {name:'Finance', ids:['reconcile','costledger','forecast','pnlcost','ledgers','finance','budget','scenario','close','backup','capitalpack','ownerecon','channelecon']},
     {name:'Sales / Doctors', ids:['channelecon','doctors','doctorprofiles','tiers','pipeline','cohorts']},
     {name:'Enterprise', ids:['enterprise','enterpriseprofiles','reports','partnercard','lift','channelecon']},
     {name:'Ops', ids:['scriptops','bulkops','forecast','pa','retention','delivery','drugs','locations','locationprofiles','leaderboard','playbooks']},
     {name:'People / Actions', ids:['people','actions','bulkops','ownerdash','heatmap','teams']},
-    {name:'Reports', ids:['forecast','analytics','costledger','channelecon','history','dataqa','importqa','maturity','qatest']},
+    {name:'Reports', ids:['reconcile','forecast','analytics','costledger','channelecon','history','dataqa','importqa','maturity','qatest']},
     {name:'Admin', ids:['search','risks','dictionary','admin','settings','channels','imports']}
   ];
 
   const LABELS = {
     command:'Command Center', mobileceo:'CEO Mobile', daily:'Daily Entry', scripts:'Script Queue', worklists:'Worklists', actions:'Actions', bulkops:'Bulk Ops', meeting:'Meeting Mode', forecast:'Forecast Engine', analytics:'Analytics + Trends', trends:'Trends', insights:'CEO Brief', setup:'Setup Wizard',
-    costledger:'Cost Attribution Ledger', pnlcost:'P&L Cost Bridge', ledgers:'Finance + Forecast', finance:'Finance', budget:'Budget', scenario:'Scenario', close:'Monthly Close', backup:'Backup', capitalpack:'Capital Pack', ownerecon:'Owner Economics', channelecon:'Channel Economics',
+    reconcile:'Reconciliation + Close', costledger:'Cost Attribution Ledger', pnlcost:'P&L Cost Bridge', ledgers:'Finance + Forecast', finance:'Finance', budget:'Budget', scenario:'Scenario', close:'Monthly Close', backup:'Backup', capitalpack:'Capital Pack', ownerecon:'Owner Economics', channelecon:'Channel Economics',
     doctors:'Doctors', doctorprofiles:'Doctor Profiles', tiers:'Doctor Tiers', pipeline:'Pipeline', cohorts:'Cohorts',
     enterprise:'Enterprise', enterpriseprofiles:'Account Profiles', reports:'Reports', partnercard:'Partner Scorecard', lift:'Lift',
     scriptops:'Script Ops', pa:'PA Intelligence', retention:'Retention + DSOH', delivery:'Delivery', drugs:'Drug Mix', locations:'Locations', locationprofiles:'Location Profiles', leaderboard:'Leaderboard', playbooks:'Playbooks',
