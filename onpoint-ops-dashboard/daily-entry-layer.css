@@ -1,0 +1,57 @@
+/* Role-based daily entry polish */
+.daily-toolbar{
+  display:grid;
+  grid-template-columns:180px 1fr auto;
+  gap:12px;
+  align-items:end;
+  margin-bottom:14px;
+}
+.daily-role-tabs{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  align-items:center;
+}
+.daily-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  justify-content:flex-end;
+}
+.role-entry-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+.entry-field label{
+  display:block;
+  margin-bottom:5px;
+}
+.entry-field .field-help{
+  margin-top:5px;
+  font-size:11px;
+  line-height:1.35;
+  color:#667085;
+}
+.entry-field.wide{
+  grid-column:1/-1;
+}
+.role-entry-grid input,
+.role-entry-grid textarea{
+  background:#fff;
+}
+.role-entry-grid input:focus,
+.role-entry-grid textarea:focus,
+.daily-toolbar input:focus{
+  outline:2px solid #bfdbfe;
+  border-color:#175cd3;
+}
+
+@media(max-width:900px){
+  .daily-toolbar{grid-template-columns:1fr;align-items:stretch}
+  .daily-actions{justify-content:stretch}
+  .daily-actions .btn{flex:1}
+  .daily-role-tabs{display:grid;grid-template-columns:repeat(3,1fr)}
+  .daily-role-tabs .btn{padding:9px 6px;font-size:12px}
+  .role-entry-grid{grid-template-columns:1fr}
+}
