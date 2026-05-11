@@ -1,0 +1,33 @@
+name: OnPoint Dashboard Smoke Test
+
+on:
+  push:
+    paths:
+      - 'onpoint-ops-dashboard/**'
+      - '.github/workflows/onpoint-dashboard-smoke.yml'
+  workflow_dispatch:
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: JavaScript syntax check
+        run: |
+          find onpoint-ops-dashboard -name '*.js' -print0 | xargs -0 -n1 node --check
+      - name: Required files exist
+        run: |
+          test -f onpoint-ops-dashboard/index.html
+          test -f onpoint-ops-dashboard/app.js
+          test -f onpoint-ops-dashboard/script-lift-layer.js
+          test -f onpoint-ops-dashboard/qa-layer.js
+          test -f onpoint-ops-dashboard/safety-guard-layer.js
+          test -f onpoint-ops-dashboard/owner-economics-layer.js
+      - name: Build 16 wired
+        run: |
+          grep -q 'script-lift-layer.js?v=2026.05.10.16' onpoint-ops-dashboard/index.html
+          grep -q 'safety-guard-layer.js?v=2026.05.10.16' onpoint-ops-dashboard/index.html
+          grep -q 'owner-economics-layer.js?v=2026.05.10.16' onpoint-ops-dashboard/index.html
