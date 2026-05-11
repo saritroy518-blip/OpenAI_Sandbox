@@ -1,0 +1,11 @@
+{
+  "name": "OnPoint Operating Dashboard",
+  "short_name": "OnPoint Ops",
+  "description": "Local-first operating dashboard for OnPoint Pharmacy.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f4f6f8",
+  "theme_color": "#111827",
+  "icons": []
+}
