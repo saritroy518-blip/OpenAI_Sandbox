@@ -4,7 +4,7 @@
   const KEY='opdash.channelecon.v1';
   const BASE_KEY='opdash.pages.v1';
   const $=id=>document.getElementById(id);
-  const esc=x=>String(x??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[m]));
+  const esc=x=>String(x??'').replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]));
   const n=x=>Number(x)||0;
   const money=x=>'$'+Math.round(n(x)).toLocaleString();
   const num=x=>Math.round(n(x)).toLocaleString();
@@ -39,12 +39,9 @@
     const gpRx=scripts?gp/scripts:0;
     const costRx=scripts?totalCost/scripts:0;
     const costGp=gp?totalCost/gp:0;
-    const cac=patients?acquisition/patients:0;
     const retention=patients?retained/patients*100:0;
-    const ltvProxy=retained?gp/Math.max(1,patients)*3:gp/Math.max(1,patients);
-    const payback=net>0&&acquisition>0?acquisition/(net/Math.max(1,30)):0;
     const score=Math.max(0,Math.min(100,Math.round((gpRx/40*30)+(retention/100*25)+((1-Math.min(costGp,1))*25)+(net>0?20:0))));
-    return{gp,totalCost,net,gpRx,costRx,costGp,cac,retention,ltvProxy,payback,score};
+    return{gp,totalCost,net,gpRx,costRx,costGp,retention,score};
   }
   function visibleRows(){let rows=(state().channels||[]).slice();if(viewFilter!=='All')rows=rows.filter(r=>r.type===viewFilter);return rows}
   function summary(rows){return rows.reduce((a,r)=>{const c=calc(r);a.scripts+=n(r.scripts);a.patients+=n(r.patients);a.gp+=c.gp;a.cost+=c.totalCost;a.net+=c.net;a.channels++;return a},{scripts:0,patients:0,gp:0,cost:0,net:0,channels:0})}
@@ -63,7 +60,7 @@
         ${metric('Channel Cost',money(s.cost),'Cost/Rx '+money(s.scripts?s.cost/s.scripts:0))}
         ${metric('Net Contribution',money(s.net),'GP minus channel cost',s.net>=0?'good':'bad')}
       </div>
-      <h2>Channel ROI Table</h2>${table(['Type','Name','Owner','Patients','Scripts','GP','Cost','Net','GP/Rx','Cost/Rx','Cost/$GP','Retention','Score',''],rows.map((r,i)=>{const c=calc(r),idx=(state().channels||[]).indexOf(r);return[esc(r.type),esc(r.name),esc(r.owner||''),num(r.patients),num(r.scripts),money(c.gp),money(c.totalCost),money(c.net),money(c.gpRx),money(c.costRx),money(c.costGp),pct(c.retention),qualityLabel(c.score),`<button class="btn red" onclick="ChannelEconomics.deleteRow(${idx})">Delete</button>`]}))}
+      <h2>Channel ROI Table</h2>${table(['Type','Name','Owner','Patients','Scripts','GP','Cost','Net','GP/Rx','Cost/Rx','Cost/$GP','Retention','Score',''],rows.map((r)=>{const c=calc(r),idx=(state().channels||[]).indexOf(r);return[esc(r.type),esc(r.name),esc(r.owner||''),num(r.patients),num(r.scripts),money(c.gp),money(c.totalCost),money(c.net),money(c.gpRx),money(c.costRx),money(c.costGp),pct(c.retention),qualityLabel(c.score),`<button class="btn red" onclick="ChannelEconomics.deleteRow(${idx})">Delete</button>`]}))}
       <div class="feature-grid two"><div><h2>Best Channels</h2>${table(['Channel','Type','Net','GP/Rx','Score'],best.map(r=>{const c=calc(r);return[esc(r.name),esc(r.type),money(c.net),money(c.gpRx),qualityLabel(c.score)]}))}</div><div><h2>Worst Channels</h2>${table(['Channel','Type','Net','Cost/$GP','Action'],worst.map(r=>{const c=calc(r);return[esc(r.name),esc(r.type),money(c.net),money(c.costGp),c.net<0?'Stop, fix, or reprice':'Watch'] }))}</div></div>
       <h2>Add Channel Economics Row</h2>${form()}
       <h2>Management Questions</h2>${table(['Question','Answer'],managementRows(rows))}
