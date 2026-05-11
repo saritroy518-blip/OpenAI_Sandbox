@@ -3,24 +3,24 @@
   'use strict';
 
   const GROUPS = [
-    {name:'Run Today', ids:['command','mobileceo','daily','worklists','actions','meeting','trends','insights','setup']},
+    {name:'Run Today', ids:['command','mobileceo','daily','scripts','worklists','actions','meeting','trends','insights','setup']},
     {name:'Finance', ids:['ledgers','finance','budget','scenario','close','backup','capitalpack']},
     {name:'Sales / Doctors', ids:['doctors','doctorprofiles','tiers','pipeline','cohorts']},
-    {name:'Enterprise', ids:['enterprise','enterpriseprofiles','reports','partnercard']},
-    {name:'Ops', ids:['pa','retention','delivery','drugs','locations','locationprofiles','leaderboard','playbooks']},
+    {name:'Enterprise', ids:['enterprise','enterpriseprofiles','reports','partnercard','lift']},
+    {name:'Ops', ids:['scriptops','pa','retention','delivery','drugs','locations','locationprofiles','leaderboard','playbooks']},
     {name:'People / Actions', ids:['people','ownerdash','heatmap','teams']},
-    {name:'Reports', ids:['history','dataqa','importqa','maturity']},
+    {name:'Reports', ids:['history','dataqa','importqa','maturity','qatest']},
     {name:'Admin', ids:['search','risks','dictionary','admin','settings','channels','imports']}
   ];
 
   const LABELS = {
-    command:'Command Center', mobileceo:'CEO Mobile', daily:'Daily Entry', worklists:'Worklists', actions:'Actions', meeting:'Meeting Mode', trends:'Trends', insights:'CEO Brief', setup:'Setup Wizard',
+    command:'Command Center', mobileceo:'CEO Mobile', daily:'Daily Entry', scripts:'Script Queue', worklists:'Worklists', actions:'Actions', meeting:'Meeting Mode', trends:'Trends', insights:'CEO Brief', setup:'Setup Wizard',
     ledgers:'Finance + Forecast', finance:'Finance', budget:'Budget', scenario:'Scenario', close:'Monthly Close', backup:'Backup', capitalpack:'Capital Pack',
     doctors:'Doctors', doctorprofiles:'Doctor Profiles', tiers:'Doctor Tiers', pipeline:'Pipeline', cohorts:'Cohorts',
-    enterprise:'Enterprise', enterpriseprofiles:'Account Profiles', reports:'Reports', partnercard:'Partner Scorecard',
-    pa:'PA Intelligence', retention:'Retention + DSOH', delivery:'Delivery', drugs:'Drug Mix', locations:'Locations', locationprofiles:'Location Profiles', leaderboard:'Leaderboard', playbooks:'Playbooks',
+    enterprise:'Enterprise', enterpriseprofiles:'Account Profiles', reports:'Reports', partnercard:'Partner Scorecard', lift:'Lift',
+    scriptops:'Script Ops', pa:'PA Intelligence', retention:'Retention + DSOH', delivery:'Delivery', drugs:'Drug Mix', locations:'Locations', locationprofiles:'Location Profiles', leaderboard:'Leaderboard', playbooks:'Playbooks',
     people:'People', ownerdash:'Owner Dashboards', heatmap:'Team Heatmap', teams:'Teams + OKRs',
-    history:'History', dataqa:'Data QA', importqa:'Import QA', maturity:'Maturity',
+    history:'History', dataqa:'Data QA', importqa:'Import QA', maturity:'Maturity', qatest:'QA Self-Test',
     search:'Search', risks:'Risks', dictionary:'Dictionary', admin:'Admin', settings:'Settings', channels:'Channels', imports:'Import Center'
   };
 
