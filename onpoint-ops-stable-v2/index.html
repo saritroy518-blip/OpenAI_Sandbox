@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>OnPoint Ops Stable v2</title>
+  <link rel="stylesheet" href="styles.css?v=2.1" />
+</head>
+<body>
+  <div class="mobilebar"><b>OnPoint Stable v2</b><button class="btn" id="menuBtn">Menu</button></div>
+  <div class="app">
+    <aside class="side">
+      <div class="brand"><div class="logo">OP</div><div><b>OnPoint Ops</b><small>Stable v2</small></div></div>
+      <nav id="nav" class="nav"></nav>
+      <div class="footer">Local browser storage only. No PHI. Build stable-v2.1</div>
+    </aside>
+    <main class="main">
+      <header class="top">
+        <div><h1 id="title">Dashboard</h1><p id="subtitle">Patients, scripts, revenue, gross profit, cost, cash, and accountability.</p></div>
+        <div class="btns"><button class="btn" id="exportBackup">Export Backup</button><button class="btn" id="importBackupBtn">Import Backup</button><input id="backupFile" class="hidden" type="file" accept=".json" /></div>
+      </header>
+      <section id="appRoot"></section>
+    </main>
+  </div>
+  <script src="app.js?v=2.1"></script>
+</body>
+</html>
